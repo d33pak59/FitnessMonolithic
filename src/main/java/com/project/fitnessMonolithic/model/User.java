@@ -1,21 +1,36 @@
 package com.project.fitnessMonolithic.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Users {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name="users")
+public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String email;
+    private String password;
+    private String firstName;
+    private String lastName;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
-    private String email;
-    private String first_name;
-    private String last_name;
-    private String password;
-    private Enum role;
 
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL ,orphanRemoval = true)
+    @JsonIgnore
+    private List<Activity> activities=new ArrayList<>();
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL ,orphanRemoval = true)
+    @JsonIgnore
+    private List<Recommendation> recommendations=new ArrayList<>();
 }
