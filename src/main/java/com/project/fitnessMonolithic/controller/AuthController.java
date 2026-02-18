@@ -5,6 +5,7 @@ import com.project.fitnessMonolithic.dto.UserResponseDTO;
 import com.project.fitnessMonolithic.model.User;
 import com.project.fitnessMonolithic.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -15,8 +16,8 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/register")
-    public User register(@RequestBody RegisterRequestDTO requestDTO) {
-        return userService.register(requestDTO);
+    public ResponseEntity<RegisterRequestDTO> register(@RequestBody RegisterRequestDTO requestDTO) {
+        return ResponseEntity.ok(userService.register(requestDTO));
     }
 
     @GetMapping("/get/{id}")
