@@ -34,6 +34,7 @@ public class Activity {
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+    private Long userInfo;
 
 
 

@@ -1,5 +1,4 @@
 package com.project.fitnessMonolithic.service;
-
 import com.project.fitnessMonolithic.dto.ActivityRequestDTO;
 import com.project.fitnessMonolithic.dto.ActivityResponseDTO;
 import com.project.fitnessMonolithic.model.Activity;
@@ -8,6 +7,9 @@ import com.project.fitnessMonolithic.repository.ActivityRepository;
 import com.project.fitnessMonolithic.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -35,8 +37,6 @@ public class ActivityService {
              .user(savedUser)
                 .build();
 
-
-
     }
 
     public ActivityResponseDTO getActivityById(Long id) {
@@ -48,5 +48,10 @@ public class ActivityService {
                 .startTime(activity.getStartTime())
                 .user(activity.getUser())
                 .build();
+    }
+
+    public List<Activity> getActivitiesByUserId(@RequestHeader Long userId) {
+    List<Activity>activities=activityRepository.findByUserInfo(userId);
+    return activities;
     }
 }
