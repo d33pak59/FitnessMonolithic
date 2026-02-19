@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Data
 @Builder
@@ -15,6 +16,8 @@ public class ActivityRequestDTO {
     private Integer duration;
     private Integer caloriesBurned;
     private LocalDateTime startTime;
+
     @NonNull
     private Long userInfo;
+    private Map<String,Object> additionalMatrix;
 }
