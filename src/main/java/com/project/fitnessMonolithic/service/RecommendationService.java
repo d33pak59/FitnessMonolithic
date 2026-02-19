@@ -1,4 +1,4 @@
-package com.project.fitnessMonolithic.controller;
+package com.project.fitnessMonolithic.service;
 import com.project.fitnessMonolithic.dto.RecommendationRequestDTO;
 import com.project.fitnessMonolithic.dto.RecommendationResponseDTO;
 import com.project.fitnessMonolithic.model.Activity;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-class RecommendationService {
+public class RecommendationService {
 
     private final RecommendationRepository recommendationRepository;
     private final ActivityRepository activityRepository;

@@ -1,7 +1,7 @@
 package com.project.fitnessMonolithic.controller;
 import com.project.fitnessMonolithic.dto.RecommendationRequestDTO;
 import com.project.fitnessMonolithic.dto.RecommendationResponseDTO;
-import com.project.fitnessMonolithic.model.Recommendation;
+import com.project.fitnessMonolithic.service.RecommendationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
