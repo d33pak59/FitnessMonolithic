@@ -2,13 +2,17 @@ package com.project.fitnessMonolithic.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Builder
 @Entity
 @Data
 @AllArgsConstructor
@@ -17,23 +21,16 @@ public class Recommendation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Enumerated(EnumType.STRING)
+    private ActivityType type;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id",nullable=false,foreignKey = @ForeignKey(name="fk_recommondation_user"))
-    @JsonIgnore
-    private User user;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="activity_id",nullable = false,foreignKey = @ForeignKey(name="fk_recommondation_activity"))
-    @JsonIgnore
-    private Activity activity;
-
-    private String type;
-
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
     private String recommendation;
+
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
@@ -46,6 +43,16 @@ public class Recommendation {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
     private List<String> safety;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id",nullable=false,foreignKey = @ForeignKey(name="fk_recommondation_user"))
+    @JsonIgnore
+    private User user;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="activity_id",nullable = false,foreignKey = @ForeignKey(name="fk_recommondation_activity"))
+    @JsonIgnore
+    private Activity activity;
 }

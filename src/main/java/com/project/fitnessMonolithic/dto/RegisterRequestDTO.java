@@ -1,4 +1,5 @@
 package com.project.fitnessMonolithic.dto;
+import com.project.fitnessMonolithic.model.Actors;
 import lombok.*;
 
 @Builder
@@ -11,4 +12,5 @@ public class RegisterRequestDTO {
     private String password;
     private String firstName;
     private String lastName;
+    private Actors role;
 }

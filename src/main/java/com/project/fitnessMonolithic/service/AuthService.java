@@ -1,26 +1,36 @@
 package com.project.fitnessMonolithic.service;
 
 import com.project.fitnessMonolithic.dto.RegisterRequestDTO;
+import com.project.fitnessMonolithic.dto.RegisterResponseDTO;
 import com.project.fitnessMonolithic.dto.UserResponseDTO;
 import com.project.fitnessMonolithic.model.User;
 import com.project.fitnessMonolithic.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class AuthService {
     private final UserRepository userRepository;
-    public  RegisterRequestDTO register(RegisterRequestDTO requestDTO) {
+    private final PasswordEncoder passwordEncoder;
+    public  RegisterResponseDTO register(RegisterRequestDTO requestDTO) {
         User user = User.builder()
                 .firstName(requestDTO.getFirstName())
                 .lastName(requestDTO.getLastName())
                 .email(requestDTO.getEmail())
-                .password(requestDTO.getPassword())
+                .role(requestDTO.getRole())
+                .password(passwordEncoder.encode(requestDTO.getPassword()))
                 .build();
-          userRepository.save(user);
-          return requestDTO;
+         User savedUser= userRepository.save(user);
+          return  RegisterResponseDTO.builder()
+                  .message("User registered successfully!")
+                  .firstName(savedUser.getFirstName())
+                  .lastName(savedUser.getLastName())
+                  .email(savedUser.getEmail())
+                  .role(savedUser.getRole())
+                  .password(savedUser.getPassword())
+                  .build();
     }
 
     public UserResponseDTO getUser(Long id) {
@@ -30,7 +40,6 @@ public class UserService {
                 .firstName(savedUser.getFirstName())
                 .lastName(savedUser.getLastName())
                 .email(savedUser.getEmail())
-                .password(savedUser.getPassword())
                 .build();
 
     }

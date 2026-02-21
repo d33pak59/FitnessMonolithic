@@ -22,10 +22,12 @@ public class ActivityService {
 
         Activity activity = Activity.builder()
                 .type(activityRequestDTO.getType())
+                .userInfo(savedUser.getId())
                 .duration(activityRequestDTO.getDuration())
                 .caloriesBurned(activityRequestDTO.getCaloriesBurned())
                 .startTime(activityRequestDTO.getStartTime())
                 .user(savedUser)
+                .additionalMatrix(activityRequestDTO.getAdditionalMatrix())
                 .build();
 
         activityRepository.save(activity);
@@ -35,6 +37,7 @@ public class ActivityService {
                 .duration(activityRequestDTO.getDuration())
                 .caloriesBurned(activityRequestDTO.getCaloriesBurned()).startTime(activityRequestDTO.getStartTime())
              .user(savedUser)
+             .additionalMatrix(activityRequestDTO.getAdditionalMatrix())
                 .build();
 
     }
@@ -47,6 +50,7 @@ public class ActivityService {
                 .caloriesBurned(activity.getCaloriesBurned())
                 .startTime(activity.getStartTime())
                 .user(activity.getUser())
+                .additionalMatrix(activity.getAdditionalMatrix())
                 .build();
     }
 
