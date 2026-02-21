@@ -52,7 +52,7 @@ public class RecommendationService {
     public List<RecommendationResponseDTO> getUserRecommendation(Long userId) {
         List<RecommendationResponseDTO> recommendationResponseDTOList = new ArrayList<>();
         List<Recommendation>recommendations= recommendationRepository.findByUserId(userId);
-        recommendations.stream().forEach(recommendation -> {
+        recommendations.forEach(recommendation -> {
             RecommendationResponseDTO responseDTO=RecommendationResponseDTO.builder()
                     .recommendation(recommendation.getRecommendation())
                     .type(recommendation.getType())

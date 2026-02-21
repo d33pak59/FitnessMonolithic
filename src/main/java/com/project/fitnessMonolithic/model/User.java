@@ -2,10 +2,7 @@ package com.project.fitnessMonolithic.model;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.jspecify.annotations.Nullable;
@@ -19,13 +16,17 @@ import java.util.Collection;
 import java.util.List;
 
 
+@Getter
+@Setter
 @Builder
 @Entity
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name="users")
+@AllArgsConstructor
+@ToString(exclude = {"activities", "recommendations"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(name = "users")
 public class User implements UserDetails {
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

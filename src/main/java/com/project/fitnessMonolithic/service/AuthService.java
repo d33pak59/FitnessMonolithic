@@ -22,12 +22,14 @@ public class AuthService {
                 .role(requestDTO.getRole())
                 .password(passwordEncoder.encode(requestDTO.getPassword()))
                 .build();
-          userRepository.save(user);
+         User savedUser= userRepository.save(user);
           return  RegisterResponseDTO.builder()
                   .message("User registered successfully!")
-                  .firstName(requestDTO.getFirstName())
-                  .lastName(requestDTO.getLastName())
-                  .email(requestDTO.getEmail())
+                  .firstName(savedUser.getFirstName())
+                  .lastName(savedUser.getLastName())
+                  .email(savedUser.getEmail())
+                  .role(savedUser.getRole())
+                  .password(savedUser.getPassword())
                   .build();
     }
 
@@ -38,7 +40,6 @@ public class AuthService {
                 .firstName(savedUser.getFirstName())
                 .lastName(savedUser.getLastName())
                 .email(savedUser.getEmail())
-                .password(savedUser.getPassword())
                 .build();
 
     }
