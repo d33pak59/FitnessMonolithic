@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -30,11 +31,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String username=jwtUtils.getUsernameFromToken(token);
 
         if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null  ) {
-            User user= (User) userRepository.findByEmail(username).orElseThrow();
+            User user= (User) userRepository.findByEmail(username).orElseThrow(()->new UsernameNotFoundException("User Not found Exception"));
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken=new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            filterChain.doFilter(request,response);
+
         }
+        filterChain.doFilter(request,response);
     }
 }

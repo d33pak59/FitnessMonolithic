@@ -6,6 +6,7 @@ import com.project.fitnessMonolithic.dto.UserResponseDTO;
 import com.project.fitnessMonolithic.model.User;
 import com.project.fitnessMonolithic.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,9 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     public  RegisterResponseDTO register(RegisterRequestDTO requestDTO) {
+        if (userRepository.existsByEmail(requestDTO.getEmail())) {
+            throw new IllegalStateException("Email already exists");
+        }
         User user = User.builder()
                 .firstName(requestDTO.getFirstName())
                 .lastName(requestDTO.getLastName())

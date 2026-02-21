@@ -4,6 +4,7 @@ import com.project.fitnessMonolithic.dto.RegisterRequestDTO;
 import com.project.fitnessMonolithic.dto.RegisterResponseDTO;
 import com.project.fitnessMonolithic.dto.UserResponseDTO;
 import com.project.fitnessMonolithic.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,9 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<RegisterResponseDTO> register(@RequestBody RegisterRequestDTO requestDTO) {
+    public ResponseEntity<RegisterResponseDTO> register(@Valid @RequestBody RegisterRequestDTO requestDTO) {
+
+        System.out.println("Auth controller validation code");
         return ResponseEntity.ok(authService.register(requestDTO));
     }
 
