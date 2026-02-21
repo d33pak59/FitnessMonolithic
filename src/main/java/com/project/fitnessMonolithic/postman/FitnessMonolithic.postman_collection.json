@@ -1,0 +1,317 @@
+{
+  "info": {
+    "_postman_id": "ff2d3ffe-d8a4-42b5-90e1-4b2ac86f5623",
+    "name": "FitnessMonolithic",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52457201",
+    "_collection_link": "https://go.postman.co/collection/52457201-ff2d3ffe-d8a4-42b5-90e1-4b2ac86f5623?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "AuthController",
+      "item": [
+        {
+          "name": "GetUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/users/get/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "users",
+                "get",
+                "2"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "SignUp",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"singh@gmail.com\",\r\n  \"password\": \"singh\",\r\n  \"firstName\": \"Deepak\",\r\n  \"lastName\": \"Singh\",\r\n  \"role\": \"USER\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/auth/signup",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "LogIn",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"singh@gmail.com\",\r\n    \"password\": \"singh\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ActivityController",
+      "item": [
+        {
+          "name": "add Activities",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"type\": \"RUNNING\",\r\n  \"duration\": 45,\r\n  \"caloriesBurned\": 350,\r\n  \"startTime\": \"2026-02-18T07:30:00\",\r\n  \"userInfo\":2\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/activity",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "activity"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getActivities",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "default"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"type\": \"RUNNING\",\r\n  \"duration\": 45,\r\n  \"caloriesBurned\": 350,\r\n  \"startTime\": \"2026-02-18T07:30:00\",\r\n  \"userInfo\":2\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/activity/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "activity",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UserActivity",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Recommendation",
+      "item": [
+        {
+          "name": "create Recommendation",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activityId\": 2,\n  \"userId\": 1,\n  \"type\": \"WEIGHT_TRAINING\",\n  \"recommendation\": \"Increase hydration and maintain steady pacing.\",\n  \"improvements\": [\n    \"Improve breathing rhythm\",\n    \"Increase stride consistency\",\n    \"Maintain upright posture\"\n  ],\n  \"suggestions\": [\n    \"Warm up for 10 minutes\",\n    \"Include interval training\",\n    \"Stretch after workout\"\n  ],\n  \"safety\": [\n    \"Avoid overtraining\",\n    \"Wear proper shoes\",\n    \"Stay hydrated\"\n  ]\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/recommendation/generate",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "recommendation",
+                "generate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UserRecommendation",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-User-Id",
+                "value": "2",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080//api/recommendation/user",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "",
+                "api",
+                "recommendation",
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ActivityRecommendation",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Activity-Id",
+                "value": "1",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/recommendation/activity",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "recommendation",
+                "activity"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": "1",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
